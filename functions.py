@@ -13,7 +13,7 @@ from CREA.models import (
 from sklearn.metrics import mean_squared_error
 from scipy.stats import boxcox
 from sklearn.preprocessing import MinMaxScaler
-from keras.callbacks import EarlyStopping
+from tensorflow.keras.callbacks import EarlyStopping
 from keras.regularizers import l1_l2
 from math import sqrt
 from numpy import hstack, vstack, asarray
