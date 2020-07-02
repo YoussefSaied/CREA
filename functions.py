@@ -4,7 +4,7 @@ import pandas as pd
 import itertools
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from models import (
+from CREA.models import (
     encoder_decoder1,
     encoder_decoder2,
     encoder_decoder3,

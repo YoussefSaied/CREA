@@ -5,7 +5,7 @@ import importlib, sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from functions import (
+from CREA.functions import (
     continueTraining_model,
     difference,
     evaluate_forecasts,

@@ -4,7 +4,7 @@ import pandas as pd
 import itertools
 import matplotlib.pyplot as plt
 import importlib, sys
-from Functions import (
+from CREA.Functions import (
     difference,
     evaluate_model,
     split_dataset,
@@ -19,7 +19,7 @@ from Functions import (
 )
 
 # importlib.reload(sys.modules['Functions'])
-from DataPreparation import dataPreparation
+from CREA.DataPreparation import dataPreparation
 from keras.models import Model, Sequential
 from keras.layers import Input, LSTM, Dense, GRU, RepeatVector, TimeDistributed
 from sklearn.metrics import mean_squared_error
@@ -276,7 +276,7 @@ plt.show()
 # %% "Super learner"
 
 importlib.reload(sys.modules["Functions"])
-from Functions import (
+from CREA.Functions import (
     difference,
     evaluate_model,
     split_dataset,
