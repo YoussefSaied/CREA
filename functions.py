@@ -4,7 +4,7 @@ import pandas as pd
 import itertools
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from CREA.models import (
+from models import (
     encoder_decoder1,
     encoder_decoder2,
     encoder_decoder3,
@@ -197,7 +197,7 @@ def build_model(
     testset = (test_x, test_y)
     # define model
 
-    model = encoder_decoder1(
+    model = encoder_decoder2(
         latent_dim1, n_outputs, n_timesteps, n_features, l1, l2,
     )
     # model = NBeatsNet(
@@ -237,7 +237,7 @@ def build_model(
             verbose=verbose,
             validation_data=testset,
             callbacks=[es],
-            shuffle=True,
+            shuffle=False,
         )
     else:
         model.summary()
@@ -248,7 +248,7 @@ def build_model(
             batch_size=batch_size,
             verbose=verbose,
             validation_data=testset,
-            shuffle=True,
+            shuffle=False,
         )
     return model, History
 
@@ -406,14 +406,14 @@ def get_models():
     models.append(ElasticNet())
     models.append(DummyRegressor())
     models.append(ExtraTreesRegressor(n_estimators=10))
-    # models.append(KNeighborsRegressor())
-    # models.append(AdaBoostRegressor())
-    # models.append(SVR(gamma='scale'))
-    # models.append(RandomForestRegressor(n_estimators=10))
-    # models.append(BaggingRegressor(n_estimators=10))
-    # models.append(DecisionTreeRegressor())
-    # models.append(LinearRegression())
-    # models.append(MLPRegressor(max_iter=1000))
+    models.append(KNeighborsRegressor())
+    models.append(AdaBoostRegressor())
+    models.append(SVR(gamma='scale'))
+    models.append(RandomForestRegressor(n_estimators=10))
+    models.append(BaggingRegressor(n_estimators=10))
+    models.append(DecisionTreeRegressor())
+    models.append(LinearRegression())
+    models.append(MLPRegressor(max_iter=1000))
     return models
 
 

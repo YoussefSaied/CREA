@@ -26,27 +26,26 @@ def encoder_decoder2(
     model = tf.keras.Sequential()
 
     model.add(
-        tf.keras.layers.Bidirectional(
-            LSTM(
+   
+            GRU(
                 latent_dim1,
                 activation="relu",
                 return_sequences=True,
                 recurrent_regularizer=l1_l2(0, 0),
                 kernel_regularizer=l1_l2(l1=l1, l2=l2),
                 dropout=0.0,
-                recurrent_dropout=0.2,
+                recurrent_dropout=0.0,            input_shape=(n_timesteps, n_features),
+
             ),
-            input_shape=(n_timesteps, n_features),
-        )
+        
     )
-    model.add(Reshape((n_timesteps * latent_dim1 * 2,)))
+    model.add(Reshape((n_timesteps * latent_dim1 ,)))
     model.add(RepeatVector(n_outputs))
-    model.add(Reshape((n_outputs, n_timesteps, latent_dim1 * 2)))
-    model.add(Dropout(0.0))
+    model.add(Reshape((n_outputs, n_timesteps, latent_dim1 )))
+    model.add(Dropout(0.1))
     model.add(
         TimeDistributed(
-            tf.keras.layers.Bidirectional(
-                LSTM(
+                GRU(
                     latent_dim1,
                     activation="relu",
                     # return_sequences=True,
@@ -54,10 +53,10 @@ def encoder_decoder2(
                     dropout=0.0,
                     recurrent_dropout=0.0,
                 )
-            )
+        
         )
     )
-    model.add(TimeDistributed(Dense(10, activation="relu")))
+    model.add(TimeDistributed(Dense(10, activation="relu", kernel_regularizer=l1_l2(l1=0, l2=0))))
 
     # model.add(
     #     Dense(
@@ -144,7 +143,7 @@ def encoder_decoder1(
     decoder_intermediate_output1 = decoder_layer(
         inputs=encoder_output, initial_state=encoder_state
     )
-    decoder_intermediate_output2 = tf.keras.layers.Dropout(0.0)(
+    decoder_intermediate_output2 = tf.keras.layers.Dropout(0.5)(
         decoder_intermediate_output1
     )
     decoder_output = layers.Dense(
